@@ -1,0 +1,42 @@
+var webpack = require('webpack'); 
+var path = require('path');
+var HtmlPackPlugin = require('html-webpack-plugin'); 
+
+module.exports = {
+    context: path.join(__dirname, 'src'),
+    entry: {
+        app: './app/app.js',
+        about: './about/about.js'
+    },
+    output: {
+        path: path.join(__dirname, 'dist'), 
+        filename: '[name].bundle.js'
+    }, 
+    module: {
+        loaders: [
+            {
+                test: /\.jsx?$/,
+                loader: 'babel',
+                include: path.join(__dirname, 'src')
+                //include: /src/, //regexp                
+                //exclude: /node_modules/
+            }
+        ]        
+    }, 
+    devServer: {
+        contentBase: path.join(__dirname, 'dist'), 
+        inline: true, 
+        stats: 'errors-only'
+    }, 
+    plugins: [
+        new HtmlPackPlugin({
+            template: path.join(__dirname, 'src', 'index.html'),
+            inject: 'body',  
+            hash: true, 
+            filename: 'index.html'
+            //chunks: ['about'] 
+            //excludeChunks: []
+
+        })
+    ]
+}; 
