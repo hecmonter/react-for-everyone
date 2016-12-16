@@ -2,7 +2,7 @@
   "name": "react-for-everyone",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "app.js",  
   "babel": {
     "presets": [
       "es2015",
@@ -16,7 +16,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "montero.hector@gmail.com",
-  "license": "ISC",
+  "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.20.0",
     "babel-loader": "^6.2.9",
