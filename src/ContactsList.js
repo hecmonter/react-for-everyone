@@ -1,6 +1,8 @@
 import React from 'react';
 import Contact from './Contact';
-import InputElement from './formElements/InputElement'; 
+import InputElement from './formElements/InputElement';
+import SelectElement from './formElements/SelectElement'; 
+import SingleCheckBox from './formElements/SingleCheckBox';
 
 class ContactsList extends React.Component {
 
@@ -12,13 +14,15 @@ class ContactsList extends React.Component {
             contacts: props.contacts, 
             name: '',
             phone: '',
-            fullName: ''
+            fullName: '', 
+            favoriteColor: ''
         }; 
 
         this.updateSearch = this.updateSearch.bind(this);
         this.addContact = this.addContact.bind(this);
         this.contactsFilter = this.contactsFilter.bind(this);  
-        this.handleFullNameChange = this.handleFullNameChange.bind(this);               
+        this.handleFullNameChange = this.handleFullNameChange.bind(this);
+        this.handleFavColorChange = this.handleFavColorChange.bind(this);               
     }
 
     addContact(event) {
@@ -52,8 +56,12 @@ class ContactsList extends React.Component {
 
     handleFullNameChange(e) {
         this.setState({ fullName: e.target.value });         
-    }    
+    }
 
+    handleFavColorChange(e) {
+        this.setState({ favoriteColor: e.target.value });
+    }
+    
     render() {
         let filteredContacts = this.state.contacts.filter(this.contactsFilter);
         return (
@@ -63,7 +71,17 @@ class ContactsList extends React.Component {
                     model={this.state.fullName} 
                     title="Enter your full Name" 
                     name="fullname" 
-                    handler={this.handleFullNameChange} />                                           
+                    handler={this.handleFullNameChange} />
+
+                <SelectElement 
+                    title="Select your option"
+                    name="select-fav-color"
+                    options={['options_1', 'options_2', 'options_3']}
+                    selectedOption={this.state.favoriteColor}                     
+                    handler={this.handleFavColorChange} />
+                
+                <SingleCheckBox label="Single Checkbox" />
+                                                           
             </div>            
         )
     }
