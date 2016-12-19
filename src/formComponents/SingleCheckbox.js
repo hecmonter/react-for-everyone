@@ -23,8 +23,8 @@ class CheckBox extends React.Component {
     render() {
         return (
             <div className="form-group">
-                <div className="col-3"></div>
-                <div className="col-9">
+                <div className="col-2"></div>
+                <div className="col-10">
                     <label className="form-checkbox">
                         <input type="checkbox" 
                             value={this.props.label} 

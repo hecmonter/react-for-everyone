@@ -1,21 +1,36 @@
-import React, {Component} from 'react';  
-import CheckboxOrRadioGroup from '../components/CheckboxOrRadioGroup';  
-import SingleInput from '../components/SingleInput';  
-import TextArea from '../components/TextArea';  
-import Select from '../components/Select';
+import React, {Component} from 'react';
+import Input from './formComponents/InputElement';
+import Select from './formComponents/SelectElement';
+import SingleCheckBox from './formComponents/SingleCheckBox';
+import CheckboxOrRadioGroup from './formComponents/CheckboxOrRadioGroup';
+import TextArea from './formComponents/TextAreaElement'; 
 
-class FormContainer extends Component {  
+class FormContainer extends Component {
   constructor(props) {
     super(props);
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleClearForm = this.handleClearForm.bind(this);
+    this.handleFavColorChange = this.handleFavColorChange.bind(this);
+    this.handleFullNameChange = this.handleFullNameChange.bind(this);
+    this.handleCBGroupSelection = this.handleCBGroupSelection.bind(this);
+    this.handleTextAreaChange = this.handleTextAreaChange.bind(this);
+
+    this.state = {
+      model: '', 
+      favoriteColor: '', 
+      options: ['Red', 'Blue'], 
+      selectedCheckBoxes: [], 
+      fullName: '', 
+      description: ''
+    }
   }
+
   componentDidMount() {
-    fetch('./fake_db.json')
+    fetch('./data.json')
       .then(res => res.json())
       .then(data => {
         this.setState({
-          ownerName: data.ownerName,
+          fullName: data.ownerName,
           petSelections: data.petSelections,
           selectedPets: data.selectedPets,
           ageOptions: data.ageOptions,
@@ -25,34 +40,80 @@ class FormContainer extends Component {
           currentPetCount: data.currentPetCount,
           description: data.description
         });
-    });
+      });
   }
+
   handleFormSubmit() {
     // submit logic goes here
   }
+
   handleClearForm() {
     // clear form logic goes here
   }
+
+  handleFavColorChange(evt){
+  }
+
+  handleFullNameChange(evt){
+    this.setState({       
+      fullName: evt.target.value
+    });
+  }
+
+  handleCBGroupSelection(evt){
+  }
+
+  handleTextAreaChange(evt){
+    this.setState({
+      description: evt.target.value
+    }); 
+  }
+
   render() {
     return (
-      <form className="container" onSubmit={this.handleFormSubmit}>
-        <h5>Pet Adoption Form</h5>
-        <SingleInput /> {/* Full name text input */}
-        <Select /> {/* Owner age range select */}
-        <CheckboxOrRadioGroup /> {/* Pet type checkboxes */}
-        <CheckboxOrRadioGroup /> {/* Will you adopt siblings? radios */}
-        <SingleInput /> {/* Number of current pets number input */}
-        <TextArea /> {/* Descriptions of current pets textarea */}
-        <input
-          type="submit"
-          className="btn btn-primary float-right"
-          value="Submit"/>
-        <button
-          className="btn btn-link float-left"
-          onClick={this.handleClearForm}>Clear form</button>
+      <form className="form-horizontal" onSubmit={this.handleFormSubmit}>
+          
+          <Input
+              inputType="text"
+              content={this.state.fullName}
+              title="Fullname"
+              name="fullname"
+              handler={this.handleFullNameChange}/> 
+                    
+          <Select
+              title="Select your option"
+              name="select-fav-color"
+              options={['options_1', 'options_2', 'options_3']}
+              selectedOption={this.state.favoriteColor}
+              handler={this.handleFavColorChange}/> 
+          
+          <SingleCheckBox label="Single Checkbox"/>
+
+          <br/>
+          <CheckboxOrRadioGroup
+              title="Check your options"
+              type="checkbox"
+              setName="cbname-group"
+              options={this.state.options}
+              selectedOptions={this.state.selectedCheckBoxes}
+              handler={this.handleCBGroupSelection}/>
+
+          <br/> 
+          <TextArea 
+            title="Type some description" 
+            rows={3} 
+            name='textarea' 
+            content={this.state.description} 
+            handler={this.handleTextAreaChange}/>
+
+          <br/>
+          <button className="btn btn-primary" type="submit">Save</button>
       </form>
-  );
+    );
+  }
+
+
 }
 
-
-//http://lorenstewart.me/2016/10/31/react-js-forms-controlled-components/
+export default FormContainer; 
+  

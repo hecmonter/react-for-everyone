@@ -1,6 +1,7 @@
 import React from 'react'; 
 import {render} from 'react-dom';
-import ContactsList from './Contacts/ContactsList';
+//import ContactsList from './Contacts/ContactsList';
+import FormContainer from './FormContainer';
 
 // Mock Data 
 let contacts =  [
@@ -32,13 +33,15 @@ class App extends React.Component {
             <div className="container">
                 <div className="columns">
                     <div className="column col-xs-6">
-                        <ContactsList contacts={this.props.contacts} />
-                    </div>                                        
+                        {/*<ContactsList contacts={this.props.contacts} />*/ }
+                        <FormContainer />
+                    </div>
+                    <div className="column col-xs-6"></div>
                 </div>
             </div>      
         )
     }
 }
 
-render(<App contacts={contacts} />, document.getElementById('app'));
+render(<App />, document.getElementById('app'));
  

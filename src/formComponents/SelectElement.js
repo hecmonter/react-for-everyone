@@ -2,10 +2,10 @@ import React from 'react';
 
 const SelectElement = (props) => (  
   <div className="form-group">
-    <div className="col-3">
+    <div className="col-2">
       <label className="form-label">{props.title}</label>
     </div>
-    <div className="col-9">
+    <div className="col-10">
       <select
         name={props.name}
         value={props.selectedOption}
