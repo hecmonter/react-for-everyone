@@ -29,9 +29,13 @@ let contacts =  [
 class App extends React.Component {        
     render() {                
         return (
-            <div>                
-                <ContactsList contacts={this.props.contacts} />
-            </div>            
+            <div className="container">
+                <div className="columns">
+                    <div className="column col-xs-6">
+                        <ContactsList contacts={this.props.contacts} />
+                    </div>                                        
+                </div>
+            </div>      
         )
     }
 }

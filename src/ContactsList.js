@@ -11,13 +11,14 @@ class ContactsList extends React.Component {
             search: '', 
             contacts: props.contacts, 
             name: '',
-            phone: ''
+            phone: '',
+            fullName: ''
         }; 
 
         this.updateSearch = this.updateSearch.bind(this);
         this.addContact = this.addContact.bind(this);
         this.contactsFilter = this.contactsFilter.bind(this);  
-        this.inputHandler = this.inputHandler.bind(this);               
+        this.handleFullNameChange = this.handleFullNameChange.bind(this);               
     }
 
     addContact(event) {
@@ -40,7 +41,6 @@ class ContactsList extends React.Component {
             search: event.target.value.substr(0, 20),
         });
     }
-
     /**
      *  @name contactsFilter
      *  @param {object} c is a single contact object. 
@@ -50,18 +50,20 @@ class ContactsList extends React.Component {
         return c.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
     }
 
-    inputHandler(evt) {
-        console.log(evt.target.value); 
-    }
-
-    
+    handleFullNameChange(e) {
+        this.setState({ fullName: e.target.value });         
+    }    
 
     render() {
         let filteredContacts = this.state.contacts.filter(this.contactsFilter);
-
         return (
             <div>
-                <InputElement inputType="text" model="Hola" title="Titulo" name="input-name" handler={this.inputHandler} />                                           
+                <InputElement 
+                    inputType="text" 
+                    model={this.state.fullName} 
+                    title="Enter your full Name" 
+                    name="fullname" 
+                    handler={this.handleFullNameChange} />                                           
             </div>            
         )
     }
