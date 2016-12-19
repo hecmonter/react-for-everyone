@@ -1,6 +1,6 @@
 import React from 'react'; 
 import {render} from 'react-dom';
-import ContactsList from './ContactsList';
+import ContactsList from './Contacts/ContactsList';
 
 // Mock Data 
 let contacts =  [

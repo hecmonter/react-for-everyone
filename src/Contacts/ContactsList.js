@@ -1,9 +1,9 @@
 import React from 'react';
 import Contact from './Contact';
-import InputElement from './formElements/InputElement';
-import SelectElement from './formElements/SelectElement'; 
-import SingleCheckBox from './formElements/SingleCheckBox';
-import CheckboxOrRadioGroup from './formElements/CheckboxOrRadioGroup';
+import InputElement from '../formElements/InputElement';
+import SelectElement from '../formElements/SelectElement'; 
+import SingleCheckBox from '../formElements/SingleCheckBox';
+import CheckboxOrRadioGroup from '../formElements/CheckboxOrRadioGroup';
 
 class ContactsList extends React.Component {
 
@@ -100,11 +100,12 @@ class ContactsList extends React.Component {
     }
     
     render() {
-        //let filteredContacts = this.state.contacts.filter(this.contactsFilter);
+        let filteredContacts = this.state.contacts.filter(this.contactsFilter);
         
         return (
             <div>
                 <form className="form-horizontal" onSubmit={this.handleFormSubmit}>
+                    {/* Single Input element */}                    
                     <InputElement 
                         inputType="text" 
                         model={this.state.fullName} 
@@ -112,6 +113,7 @@ class ContactsList extends React.Component {
                         name="fullname" 
                         handler={this.handleFullNameChange} />
 
+                    {/* Select element */}
                     <SelectElement 
                         title="Select your option"
                         name="select-fav-color"
@@ -119,8 +121,12 @@ class ContactsList extends React.Component {
                         selectedOption={this.state.favoriteColor}                     
                         handler={this.handleFavColorChange} />
                     
+
+                    {/* Single Checkbox */}
                     <SingleCheckBox label="Single Checkbox" />
                     <br />
+
+                    {/* Group Checkbox */}
                     <CheckboxOrRadioGroup 
                         title="Check your options" 
                         type="checkbox" 
@@ -130,14 +136,13 @@ class ContactsList extends React.Component {
                         handler={this.handleCBGroupSelection} />
 
                     <br />
+
+                    {/* Single Button */}
                     <button className="btn btn-primary" type="submit">Save</button>                        
-                </form>
-                                                                           
+                </form>                                                                           
             </div>            
         )
     }
-
-
 }
 
 export default ContactsList;

@@ -1,23 +1,29 @@
 import React from 'react';
 
 const CheckboxOrRadioGroup = (props) => (
-  <div>
-    <label className="form-label">{props.title}</label>
-    <div className="checkbox-group">
-      {props.options.map(opt => (
-          <label key={opt} className="form-checkbox capitalize">
-            <input              
-              className='form-checkbox'
-              name={props.setName}
-              onChange={props.handler}
-              value={opt}
-              checked={props.selectedOptions.indexOf(opt) > -1}
-              type={props.type} /> 
-              <i className="form-icon"></i>
-              {opt}
-          </label>
-        ))}
+  <div className="form-group">
+    
+    <div className="col-3">
+      <label className="form-label">{props.title}</label> 
     </div>
+
+    <div className="col-9">
+      <div className="checkbox-group">
+        {props.options.map(opt => ( 
+            <label key={opt} className="form-checkbox capitalize">
+              <input              
+                className='form-checkbox'
+                name={props.setName}
+                onChange={props.handler}
+                value={opt}
+                checked={props.selectedOptions.indexOf(opt) > -1}
+                type={props.type} /> 
+                <i className="form-icon"></i>
+                {opt}
+            </label>
+          ))}
+      </div> 
+    </div>    
   </div>
 );
 
@@ -30,4 +36,4 @@ CheckboxOrRadioGroup.propTypes = {
   handler: React.PropTypes.func.isRequired
 };
 
-export default CheckboxOrRadioGroup;  
+export default CheckboxOrRadioGroup;
