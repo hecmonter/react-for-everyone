@@ -3,6 +3,7 @@ import Contact from './Contact';
 import InputElement from './formElements/InputElement';
 import SelectElement from './formElements/SelectElement'; 
 import SingleCheckBox from './formElements/SingleCheckBox';
+import CheckboxOrRadioGroup from './formElements/CheckboxOrRadioGroup';
 
 class ContactsList extends React.Component {
 
@@ -15,16 +16,32 @@ class ContactsList extends React.Component {
             name: '',
             phone: '',
             fullName: '', 
-            favoriteColor: ''
+            favoriteColor: '',             
+            selectedCheckBoxes: ['dog', 'pony'], 
+            options:['dog', 'pony', 'fish', 'cat']
+
         }; 
 
         this.updateSearch = this.updateSearch.bind(this);
         this.addContact = this.addContact.bind(this);
         this.contactsFilter = this.contactsFilter.bind(this);  
         this.handleFullNameChange = this.handleFullNameChange.bind(this);
-        this.handleFavColorChange = this.handleFavColorChange.bind(this);               
+        this.handleFavColorChange = this.handleFavColorChange.bind(this);
+        this.handleFormSubmit = this.handleFormSubmit.bind(this);     
+        this.handleCBGroupSelection = this.handleCBGroupSelection.bind(this);         
+
+          
     }
 
+    componentDidMount() {
+    }
+
+    componentWillMount() {         
+    }
+
+    componentWillUnmount() {
+    }
+    
     addContact(event) {
         event.preventDefault();        
 
@@ -55,54 +72,71 @@ class ContactsList extends React.Component {
     }
 
     handleFullNameChange(e) {
+        // Apply validation here.
         this.setState({ fullName: e.target.value });         
     }
 
     handleFavColorChange(e) {
         this.setState({ favoriteColor: e.target.value });
     }
+
+    handleFormSubmit(e) {
+        e.preventDefault();
+        console.log('Form submitted: %O', e); 
+    }
+
+    handleCBGroupSelection(e) {
+        const newSelection = e.target.value;
+        let newSelectionArray;
+
+        if(this.state.selectedCheckBoxes.indexOf(newSelection) > -1) {
+            newSelectionArray = this.state.selectedCheckBoxes.filter(s => s !== newSelection); 
+        }
+        else {
+            newSelectionArray = [...this.state.selectedCheckBoxes, newSelection];
+        }
+
+        this.setState({ selectedCheckBoxes: newSelectionArray });         
+    }
     
     render() {
-        let filteredContacts = this.state.contacts.filter(this.contactsFilter);
+        //let filteredContacts = this.state.contacts.filter(this.contactsFilter);
+        
         return (
             <div>
-                <InputElement 
-                    inputType="text" 
-                    model={this.state.fullName} 
-                    title="Enter your full Name" 
-                    name="fullname" 
-                    handler={this.handleFullNameChange} />
+                <form className="form-horizontal" onSubmit={this.handleFormSubmit}>
+                    <InputElement 
+                        inputType="text" 
+                        model={this.state.fullName} 
+                        title="Fullname" 
+                        name="fullname" 
+                        handler={this.handleFullNameChange} />
 
-                <SelectElement 
-                    title="Select your option"
-                    name="select-fav-color"
-                    options={['options_1', 'options_2', 'options_3']}
-                    selectedOption={this.state.favoriteColor}                     
-                    handler={this.handleFavColorChange} />
-                
-                <SingleCheckBox label="Single Checkbox" />
-                                                           
+                    <SelectElement 
+                        title="Select your option"
+                        name="select-fav-color"
+                        options={['options_1', 'options_2', 'options_3']}
+                        selectedOption={this.state.favoriteColor}                     
+                        handler={this.handleFavColorChange} />
+                    
+                    <SingleCheckBox label="Single Checkbox" />
+                    <br />
+                    <CheckboxOrRadioGroup 
+                        title="Check your options" 
+                        type="checkbox" 
+                        setName="cbname-group" 
+                        options={this.state.options}  
+                        selectedOptions={this.state.selectedCheckBoxes} 
+                        handler={this.handleCBGroupSelection} />
+
+                    <br />
+                    <button className="btn btn-primary" type="submit">Save</button>                        
+                </form>
+                                                                           
             </div>            
         )
     }
 
-    // <form onSubmit={this.addContact}>
-    //     <input type="text" ref={i => this._name = i}/>
-    //     <input type="text" ref={i => this._phone = i}/>
-    //     <button type="submit">Add New</button>                    
-    // </form>
-
-    // <input 
-    //     type="text" 
-    //     placeholder="Search"
-    //     value={this.state.search} 
-    //     onChange={this.updateSearch}
-    // />                
-    // <ul>
-    //     {filteredContacts.map( (c) => { 
-    //         return <Contact key={c.id} contact={c} />
-    //     })}                                
-    // </ul>
 
 }
 

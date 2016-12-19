@@ -3,14 +3,18 @@ import React from 'react';
 const InputElement = (props) => {
     return (  
         <div className="form-group">
-            <label className="form-label">{props.title}</label>
-            <input
-                className="form-input"
-                name={props.name}
-                type={props.inputType}
-                value={props.model}
-                onChange={props.handler}
-                placeholder={props.placeholder} />
+            <div className="col-3">
+                <label className="form-label">{props.title}</label>
+            </div>
+            <div className="col-9">
+                <input
+                    className="form-input"
+                    name={props.name}
+                    type={props.inputType}
+                    value={props.model}
+                    onChange={props.handler}
+                    placeholder={props.placeholder} />
+            </div>            
         </div>
     )                
 };

@@ -2,19 +2,23 @@ import React from 'react';
 
 const SelectElement = (props) => (  
   <div className="form-group">
-    <label className="form-label">{props.title}</label>
-    <select
-      name={props.name}
-      value={props.selectedOption}
-      onChange={props.handler}
-      className="form-select">
-      <option value="">{props.placeholder}</option>
-      {props.options.map((o) => {
-        return (
-          <option key={o} value={o}>{o}</option>
-        );
-      })}
-    </select>
+    <div className="col-3">
+      <label className="form-label">{props.title}</label>
+    </div>
+    <div className="col-9">
+      <select
+        name={props.name}
+        value={props.selectedOption}
+        onChange={props.handler}
+        className="form-select">
+        <option value="">{props.placeholder}</option>
+        {props.options.map((o) => {
+          return (
+            <option key={o} value={o}>{o}</option>
+          );
+        })}
+      </select>    
+    </div>
   </div>
 );
 

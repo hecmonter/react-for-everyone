@@ -15,7 +15,7 @@ class CheckBox extends React.Component {
     toggleCheckbox() {
         this.setState({
             isChecked: !this.state.isChecked
-        }); 
+        });
         
         //this.props.handleCheckboxChange(this.props.label);
     }
@@ -23,15 +23,18 @@ class CheckBox extends React.Component {
     render() {
         return (
             <div className="form-group">
-                <label className="form-checkbox">
-                    <input type="checkbox" 
-                        value={this.props.label} 
-                        checked={this.state.isChecked} 
-                        onChange={this.toggleCheckbox} />
-                        <i className="form-icon"></i>
+                <div className="col-3"></div>
+                <div className="col-9">
+                    <label className="form-checkbox">
+                        <input type="checkbox" 
+                            value={this.props.label} 
+                            checked={this.state.isChecked} 
+                            onChange={this.toggleCheckbox} />
+                            <i className="form-icon"></i>
 
-                    {this.props.label}
-                </label>
+                        {this.props.label}
+                    </label> 
+                </div>                
             </div>
         );
     }
