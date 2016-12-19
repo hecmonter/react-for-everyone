@@ -1,5 +1,6 @@
 import React from 'react';
 import Contact from './Contact';
+import InputElement from './formElements/InputElement'; 
 
 class ContactsList extends React.Component {
 
@@ -15,7 +16,8 @@ class ContactsList extends React.Component {
 
         this.updateSearch = this.updateSearch.bind(this);
         this.addContact = this.addContact.bind(this);
-        this.contactsFilter = this.contactsFilter.bind(this);                 
+        this.contactsFilter = this.contactsFilter.bind(this);  
+        this.inputHandler = this.inputHandler.bind(this);               
     }
 
     addContact(event) {
@@ -48,22 +50,18 @@ class ContactsList extends React.Component {
         return c.name.toLowerCase().indexOf(this.state.search.toLowerCase()) !== -1;
     }
 
+    inputHandler(evt) {
+        console.log(evt.target.value); 
+    }
+
+    
+
     render() {
         let filteredContacts = this.state.contacts.filter(this.contactsFilter);
 
         return (
             <div>
-                <input 
-                    type="text" 
-                    placeholder="Search"
-                    value={this.state.search} 
-                    onChange={this.updateSearch}
-                />                
-                <ul>
-                    {filteredContacts.map( (c) => { 
-                        return <Contact key={c.id} contact={c} />
-                    })}                                
-                </ul>                           
+                <InputElement inputType="text" model="Hola" title="Titulo" name="input-name" handler={this.inputHandler} />                                           
             </div>            
         )
     }
@@ -73,6 +71,19 @@ class ContactsList extends React.Component {
     //     <input type="text" ref={i => this._phone = i}/>
     //     <button type="submit">Add New</button>                    
     // </form>
+
+    // <input 
+    //     type="text" 
+    //     placeholder="Search"
+    //     value={this.state.search} 
+    //     onChange={this.updateSearch}
+    // />                
+    // <ul>
+    //     {filteredContacts.map( (c) => { 
+    //         return <Contact key={c.id} contact={c} />
+    //     })}                                
+    // </ul>
+
 }
 
 export default ContactsList;

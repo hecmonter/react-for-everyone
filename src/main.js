@@ -2,9 +2,6 @@ import React from 'react';
 import {render} from 'react-dom';
 import ContactsList from './ContactsList';
 
-//import ControlledForm from './ControlledForm';
-
-
 // Mock Data 
 let contacts =  [
     {
@@ -32,8 +29,7 @@ let contacts =  [
 class App extends React.Component {        
     render() {                
         return (
-            <div>
-                <span className="label">Contact List</span>
+            <div>                
                 <ContactsList contacts={this.props.contacts} />
             </div>            
         )
